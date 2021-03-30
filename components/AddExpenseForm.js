@@ -1,11 +1,25 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { AppContext } from "../context";
+import { v4 as uuidv4 } from "uuid";
+
 export default function AddExpenseForm() {
+  const { dispatch } = useContext(AppContext);
   const [name, setName] = useState("");
   const [cost, setCost] = useState("");
 
   const onSubmit = (event) => {
     event.preventDefault();
-    alert(name);
+
+    const expense = {
+      id: uuidv4(),
+      name: name,
+      cost: parseInt(cost),
+    };
+
+    dispatch({
+      type: "ADD_EXPENSE",
+      payload: expense,
+    });
   };
 
   return (

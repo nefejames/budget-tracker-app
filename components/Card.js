@@ -1,6 +1,6 @@
-export default function Budget({ data }) {
+export default function Card({ alertType, data }) {
   return (
-    <div className="alert alert-secondary">
+    <div className={`alert ${alertType ? alertType : "alert-secondary"}`}>
       <span>{data}</span>
     </div>
   );

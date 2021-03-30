@@ -6,7 +6,13 @@ import AddExpenseForm from "../components/AddExpenseForm";
 import { AppContext } from "../context";
 
 export default function Home() {
-  const { budget } = useContext(AppContext);
+  const { budget, expenses } = useContext(AppContext);
+
+  const totalExpenses = expenses.reduce((total, item) => {
+    return (total += item.cost);
+  }, 0);
+
+  const alertType = totalExpenses > budget ? "alert-danger" : "alert-success";
 
   return (
     <div className="container">
@@ -20,10 +26,10 @@ export default function Home() {
           <Card data={`Budget: £${budget}`} />
         </div>
         <div className="col-sm">
-          <Card data="Remaining: £1000" />
+          <Card data="Remaining: £1000" alertType={alertType} />
         </div>
         <div className="col-sm">
-          <Card data="Spent so far: £1000" />
+          <Card data={`Spent so far: £${totalExpenses}`} />
         </div>
       </div>
       <h3 className="mt-3">Expenses</h3>
