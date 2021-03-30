@@ -26,7 +26,10 @@ export default function Home() {
           <Card data={`Budget: £${budget}`} />
         </div>
         <div className="col-sm">
-          <Card data="Remaining: £1000" alertType={alertType} />
+          <Card
+            data={`Remaining: £ ${budget - totalExpenses}`}
+            alertType={alertType}
+          />
         </div>
         <div className="col-sm">
           <Card data={`Spent so far: £${totalExpenses}`} />
